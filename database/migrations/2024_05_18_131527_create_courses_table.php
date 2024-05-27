@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('user_token', 50);
             $table->string('name', 200);
+            $table->string('teacher', 200);
             $table->string('thumbnail', 150);
             $table->string('video', 150)->nullable();
-            $table->string('description')->nullable();
+            $table->string('description', 1000)->nullable();
             $table->smallInteger('type_id');
             $table->float('price');
             $table->smallInteger('lesson_num')->nullable();

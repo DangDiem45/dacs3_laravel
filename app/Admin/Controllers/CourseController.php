@@ -31,10 +31,11 @@ class CourseController extends AdminController
         $grid = new Grid(new Course());
 
         $grid->column('id', __('Id'));
-        $grid->column('user_token', __('Teacher'))->display(function ($token){
-            return User::where('token', '=', $token)->value('name');
-        });
+        // $grid->column('user_token', __('Teacher'))->display(function ($token){
+        //     return User::where('token', '=', $token)->value('name');
+        // });
         $grid->column('name', __('Name'));
+        $grid->column('teacher', __('Teacher'));
         $grid->column('thumbnail', __('Thumbnail'))->image('', 50, 50);
     
         $grid->column('description', __('Description'));
@@ -80,17 +81,17 @@ class CourseController extends AdminController
     protected function form(){
         $form = new Form(new Course());
         $form->text('name', __('Name'));
+        $form->text('teacher', __('Teacher'));
         $result = CourseType::pluck('title','id');
         $form->select('type_id', __('Category'))->options($result);
         $form->image('thumbnail', __('Thumbnail'))->uniqueName();
-
         $form->file('video', __('Video'))->uniqueName();
         $form->text('description', __('Description'));
         $form->decimal('price', __('Price'));
         $form->number('lesson_num', __('Lesson Number'));
         $form->number('video_length', __('Video length'));
         $result = User::pluck('name', 'token');
-        $form->select('user_token', __('Teacher'))->options($result);
+        $form->select('user_token', __('User Token'))->options($result);
         $form->display('created_at', __('Created at'));
         $form->display('updated_at', __('Updated_at'));
 
