@@ -15,6 +15,11 @@ Route::group([
     $router->resource('/users', UserController::class);
     $router->resource('/course-types', CourseTypeController::class);
     $router->resource('/courses', CourseController::class);
+    $router->resource('/lessons', LessonController::class);
+    $router->resource('/subjects', SubjectController::class); 
+    $router->resource('/lectures', LectureController::class);
+    $router->resource('/questions', QuestionController::class);
+    $router->resource('/options', OptionController::class);
 
 
 });

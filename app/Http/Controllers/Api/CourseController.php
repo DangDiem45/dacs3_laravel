@@ -9,7 +9,7 @@ use App\Models\Course;
 class CourseController extends Controller
 {
     public function courseList(){
-        $result = Course::select('name','teacher' ,'thumbnail', 'lesson_num', 'price', 'id')->get();
+        $result = Course::select('name','teacher' ,'thumbnail', 'lesson_num', 'price', 'id', 'video_length')->get();
         return response()->json([
             'code' => 200,
             'msg' => 'My course list is here',
@@ -47,5 +47,45 @@ class CourseController extends Controller
             );
         }
     
+    }
+
+    public function courseFeature(Request $request){
+        $user = $request->user();
+
+        $result = Course::where('recommended','=', 1)
+        ->select('name', 'thumbnail', 'teacher', 'lesson_num', 'id', 'price', 'video_length')->get();
+
+        return response()->json([
+            'code' => 200,
+            'msg' => 'The courses recommended for you',
+            'data' => $result
+        ], 200);
+    }
+
+    public function courseSearchDefault(Request $request){
+        $user = $request->user();
+
+        $result = Course::where('recommended','=', 1)
+        ->select('name', 'thumbnail', 'teacher', 'lesson_num', 'id', 'price', 'video_length')->get();
+
+        return response()->json([
+            'code' => 200,
+            'msg' => 'The courses recommended for you',
+            'data' => $result
+        ], 200);
+    }
+
+    public function courseSearch(Request $request){
+        $user = $request->user();
+        $search = $request->search;
+
+        $result = Course::where("name", "like", "%" .$search. "%")
+        ->select('name', 'thumbnail', 'teacher', 'lesson_num', 'id', 'price', 'video_length')->get();
+
+        return response()->json([
+            'code' => 200,
+            'msg' => 'The courses you searched',
+            'data' => $result
+        ], 200);
     }
 }
