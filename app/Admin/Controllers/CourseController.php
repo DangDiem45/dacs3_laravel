@@ -19,7 +19,7 @@ class CourseController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Course';
+    protected $title = 'Course'; 
 
     /**
      * Make a grid builder.
@@ -94,6 +94,7 @@ class CourseController extends AdminController
         $form->select('user_token', __('User Token'))->options($result);
         $form->display('created_at', __('Created at'));
         $form->display('updated_at', __('Updated_at'));
+        $form->switch('recommended', __('Recommended'))->default(0);
 
         // $form->select('parent_id', __('Parent Category'))->options((new CourseType())::selectOptions());
         // $form->text('title', __('Title'));
